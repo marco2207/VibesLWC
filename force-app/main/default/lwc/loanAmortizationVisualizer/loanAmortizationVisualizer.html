@@ -1,0 +1,93 @@
+<template>
+    <lightning-card title="Loan Amortization Visualizer" icon-name="standard:account">
+        <div class="slds-p-around_medium">
+            
+            <!-- Input Section -->
+            <div class="slds-grid slds-wrap slds-gutters input-section">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-input
+                        type="number"
+                        label="Loan Amount"
+                        value={loanAmount}
+                        formatter="currency"
+                        step="1000"
+                        min="1000"
+                        onchange={handleLoanAmountChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-input
+                        type="number"
+                        label="Interest Rate (%)"
+                        value={interestRate}
+                        step="0.1"
+                        min="0"
+                        max="30"
+                        onchange={handleInterestRateChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-input
+                        type="number"
+                        label="Term (Years)"
+                        value={termYears}
+                        step="1"
+                        min="1"
+                        max="40"
+                        onchange={handleTermYearsChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <!-- Slider Section -->
+            <div class="slider-section slds-m-top_large">
+                <lightning-slider
+                    label="Extra Monthly Principal"
+                    value={extraPrincipal}
+                    min="0"
+                    max="1000"
+                    step="50"
+                    onchange={handleExtraPrincipalChange}>
+                </lightning-slider>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section slds-m-top_large">
+                <div class="slds-text-heading_medium slds-m-bottom_medium">
+                    Amortization Results
+                </div>
+                
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="result-card">
+                            <div class="result-label">New Monthly Payment</div>
+                            <div class="result-value">{formattedNewMonthlyPayment}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="result-card">
+                            <div class="result-label">Total Interest</div>
+                            <div class="result-value">{formattedTotalInterest}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="result-card highlight">
+                            <div class="result-label">Interest Saved</div>
+                            <div class="result-value saved">{formattedInterestSaved}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                        <div class="result-card">
+                            <div class="result-label">Time Saved</div>
+                            <div class="result-value">{timeSaved}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>
